@@ -19,7 +19,14 @@ class ArticleHeader(DBSerializable):
         self.__title = self.get_attr("title")
         self.__link = self.get_attr("link")
 
+    def get_time(self):
+        return self.__post_date
+
     def __eq__(self, other):
         return self.__post_date == other.__post_date and \
                self.__title == other.__title and \
                self.__link == other.__link
+
+    def __lt__(self, other):
+        if isinstance(other, ArticleHeader):
+            return self.__post_date < other.__post_date
