@@ -1,0 +1,7 @@
+.venv/
+.idea/
+backend/plugins/scrappers/
+*/__pycache__/
+/tests/.pytest_cache/
+*.db
+*/start.sh

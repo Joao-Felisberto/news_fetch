@@ -1,0 +1,5 @@
+flask_restful
+requests
+beautifulsoup4
+flask
+matplotlib
