@@ -94,17 +94,17 @@ if __name__ == '__main__':
                 print("Iteration")
                 last_date = db.get_last_article_time()
 
-                print("last date:", last_date)
+                print("last date:", last_date.strftime('%Y-%m-%d %H:%M:%S'))
 
                 arts = [a for a in fetch(db) if a.get_time() > last_date]
 
-                print(arts)
+                print(last_date, len(arts), [a.get_attributes_map() for a in arts])
 
                 for a in arts:
                     msg = a.get_attributes_map()
                     date_: datetime = msg['post_date']
                     msg = f"[{date_.strftime('%Y-%m-%d %H:%M:%S')}]: **{msg['title']}**: <{msg['link']}>"
-                    print(msg)
+                    # print(msg)
                     # asyncio.create_task(client.get_channel(int(channel)).send(msg))
                     # _thread.start_new_thread(idfk, (msg, ))
                     await client.get_channel(int(channel)).send(msg)

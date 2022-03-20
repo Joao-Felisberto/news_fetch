@@ -121,7 +121,7 @@ class DBManager(_DBConnector):
 
     def get_last_article_time(self):
         times = self._run(
-            f"SELECT post_date FROM main.article_headers ORDER BY post_date LIMIT 1"
+            f"SELECT post_date FROM main.article_headers ORDER BY post_date DESC LIMIT 1"
         )
 
         return [datetime.strptime(t[0], "%Y-%m-%d %H:%M:%S") for t in times][0]
