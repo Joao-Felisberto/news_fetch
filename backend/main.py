@@ -1,5 +1,3 @@
-import _thread
-import asyncio
 import json
 import os
 from datetime import datetime
@@ -76,6 +74,7 @@ if __name__ == '__main__':
 
         client = discord.Client()
 
+
         @client.event
         async def on_ready():
             print("Client launched")
@@ -103,11 +102,21 @@ if __name__ == '__main__':
                 for a in arts:
                     msg = a.get_attributes_map()
                     date_: datetime = msg['post_date']
-                    msg = f"[{date_.strftime('%Y-%m-%d %H:%M:%S')}]: **{msg['title']}**: <{msg['link']}>"
+                    # msg = f"[{date_.strftime('%Y-%m-%d %H:%M:%S')}]: **{msg['title']}**: <{msg['link']}>"
                     # print(msg)
                     # asyncio.create_task(client.get_channel(int(channel)).send(msg))
                     # _thread.start_new_thread(idfk, (msg, ))
-                    await client.get_channel(int(channel)).send(msg)
+
+                    embed = discord.Embed(
+                        title=msg['title'],
+                        url=msg['link'],
+                        timestamp=date_  # .strftime('%Y-%m-%d %H:%M:%S')
+                    )
+
+                    embed.add_field(name="Introdução", value="//TODO", inline=False)
+
+                    # await client.get_channel(int(channel)).send(msg)
+                    await client.get_channel(int(channel)).send(embed=embed)
 
                 sleep(delay)
 
