@@ -80,7 +80,7 @@ if __name__ == '__main__':
         async def on_ready():
             print("Client launched")
 
-            db = DBManager("backend/db/db/db.db")
+            db = DBManager("backend/db.db")
             db.create()
 
             print("db connected")
