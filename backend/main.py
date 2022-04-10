@@ -3,6 +3,8 @@ import os
 from datetime import datetime
 from sys import argv
 
+from discord import HTTPException
+
 from api.api import app
 from db.DBManager import DBManager
 from db.objects.article_header import ArticleHeader
@@ -116,7 +118,14 @@ if __name__ == '__main__':
                     embed.add_field(name="Introdução", value="//TODO", inline=False)
 
                     # await client.get_channel(int(channel)).send(msg)
-                    await client.get_channel(int(channel)).send(embed=embed)
+                    try:
+                        await client.get_channel(int(channel)).send(embed=embed)
+                    except HTTPException:
+                        embed = discord.Embed(
+                            title=msg['title'],
+                            timestamp=date_  # .strftime('%Y-%m-%d %H:%M:%S')
+                        )
+                        await client.get_channel(int(channel)).send(embed=embed)
 
                 sleep(delay)
 
